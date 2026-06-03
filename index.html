@@ -1,1 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sweet Signature by Papsie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+  :root {
+    --cream: #FAF5EF;
+    --blush: #E8C5B8;
+    --rose: #C4747A;
+    --deep: #7A2D35;
+    --mocha: #3D1F1F;
+    --gold: #C9A96E;
+    --light-pink: #F2DDD6;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--mocha);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed; width: 10px; height: 10px;
+    background: var(--rose); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid var(--rose); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250, 245, 239, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196, 116, 122, 0.15);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: var(--deep); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--mocha); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--rose); }
+  .nav-cta {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    border: 1px solid var(--rose); color: var(--rose);
+    padding: 0.6rem 1.4rem; text-decoration: none;
+    transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--rose); color: white; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(232, 197, 184, 0.3) 0%, transparent 60%);
+  }
+  .hero-text {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--mocha); margin-bottom: 0.2rem;
+  }
+  .hero-title em { color: var(--rose); font-style: italic; }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-style: italic; font-weight: 300;
+    color: var(--rose); margin-bottom: 2rem;
+    letter-spacing: 0.04em;
+  }
+  .hero-desc {
+    font-size: 0.85rem; font-weight: 300;
+    line-height: 1.9; color: #6B4444;
+    max-width: 360px; margin-bottom: 3rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-location {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero-location svg { width: 12px; height: 12px; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--deep); color: var(--cream);
+    padding: 1rem 2.5rem;
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.4s;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: ''; position: absolute;
+    inset: 0; background: var(--rose);
+    transform: translateX(-101%); transition: transform 0.4s;
+    z-index: -1;
+  }
+  .btn-primary:hover::after { transform: translateX(0); }
+  .btn-primary:hover { color: white; }
+
+  .hero-visual {
+    position: relative; overflow: hidden;
+    background: var(--light-pink);
+  }
+  .hero-cake-display {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--blush) 0%, var(--light-pink) 50%, var(--cream) 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10rem;
+    position: relative;
+  }
+  .hero-cake-display::before {
+    content: '';
+    position: absolute;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .hero-cake-display::after {
+    content: '';
+    position: absolute;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,116,122,0.2);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .float-tag {
+    position: absolute; background: white;
+    padding: 0.8rem 1.2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--mocha);
+  }
+  .float-tag.top-left { top: 20%; left: -40px; animation: floatY 4s ease-in-out infinite; }
+  .float-tag.bottom-right { bottom: 25%; right: -30px; animation: floatY 4s ease-in-out infinite 2s; }
+  .float-tag span { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--rose); }
+  @keyframes floatY {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    overflow: hidden; background: var(--deep);
+    padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .marquee-track {
+    display: flex; gap: 3rem;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--blush); letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .marquee-dot { color: var(--gold); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* OFFERINGS */
+  .offerings {
+    padding: 8rem 6rem;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 6rem; align-items: start;
+  }
+  .section-label {
+    font-size: 0.6rem; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--gold);
+    writing-mode: vertical-rl; transform: rotate(180deg);
+    height: fit-content;
+  }
+  .section-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300; line-height: 1.1;
+    color: var(--mocha); margin-bottom: 1rem;
+  }
+  .section-header em { color: var(--rose); font-style: italic; }
+  .offerings-intro {
+    font-size: 0.85rem; font-weight: 300; line-height: 1.9;
+    color: #6B4444; max-width: 500px; margin-bottom: 4rem;
+    letter-spacing: 0.02em;
+  }
+  .offerings-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  }
+  .offering-card {
+    background: white; padding: 2rem 1.5rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.4s; text-align: center;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  }
+  .offering-card:hover {
+    border-bottom-color: var(--rose);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(196,116,122,0.15);
+  }
+  .offering-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .offering-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--deep);
+    margin-bottom: 0.4rem;
+  }
+  .offering-sub {
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--rose);
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 8rem 6rem;
+    background: var(--mocha);
+    position: relative; overflow: hidden;
+  }
+  .services::before {
+    content: 'OCCASIONS';
+    position: absolute; right: -2rem; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem; font-weight: 600;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: 0.1em; white-space: nowrap;
+  }
+  .services-header { text-align: center; margin-bottom: 5rem; }
+  .services-header .section-label {
+    writing-mode: initial; transform: none;
+    display: block; margin-bottom: 1rem;
+    color: var(--gold);
+  }
+  .services-header .section-header { color: var(--cream); }
+  .services-header .section-header em { color: var(--blush); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.05);
+    max-width: 900px; margin: 0 auto;
+  }
+  .service-item {
+    padding: 2.5rem 2rem; text-align: center;
+    background: var(--mocha);
+    transition: background 0.3s;
+    position: relative;
+  }
+  .service-item:hover { background: #4D2929; }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; color: rgba(201,169,110,0.2);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .service-name {
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--blush);
+  }
+
+  /* PROCESS / WHY */
+  .why {
+    padding: 8rem 6rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;
+    align-items: center;
+  }
+  .why-visual {
+    position: relative; height: 500px;
+  }
+  .why-card {
+    position: absolute;
+    background: white; padding: 2.5rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+  .why-card.main { width: 75%; top: 0; left: 0; }
+  .why-card.accent {
+    width: 55%; bottom: 0; right: 0;
+    background: var(--rose); color: white;
+  }
+  .why-card-label {
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .why-card.accent .why-card-label { color: rgba(255,255,255,0.7); }
+  .why-card-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; line-height: 1.3; color: var(--mocha);
+  }
+  .why-card.accent .why-card-text { color: white; font-size: 1.3rem; }
+  .why-desc {
+    font-size: 0.85rem; font-weight: 300; line-height: 1.9;
+    color: #6B4444; margin-bottom: 2.5rem; letter-spacing: 0.02em;
+  }
+  .pillars { display: flex; flex-direction: column; gap: 1.5rem; }
+  .pillar {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding-bottom: 1.5rem; border-bottom: 1px solid rgba(196,116,122,0.15);
+  }
+  .pillar:last-child { border-bottom: none; }
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--blush);
+    line-height: 1; flex-shrink: 0;
+  }
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--deep); margin-bottom: 0.3rem;
+  }
+  .pillar-text {
+    font-size: 0.78rem; font-weight: 300; color: #6B4444;
+    line-height: 1.7; letter-spacing: 0.01em;
+  }
+
+  /* GALLERY */
+  .gallery { padding: 6rem; }
+  .gallery-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 3rem;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 280px 280px;
+    gap: 1rem;
+  }
+  .gallery-cell {
+    overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem; background: var(--light-pink);
+    transition: transform 0.5s;
+  }
+  .gallery-cell:hover { transform: scale(0.98); }
+  .gallery-cell.tall { grid-row: 1 / 3; }
+  .gallery-cell::after {
+    content: attr(data-label);
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(transparent, rgba(61,31,31,0.5));
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: white; opacity: 0; transition: opacity 0.3s;
+  }
+  .gallery-cell:hover::after { opacity: 1; }
+  .g1 { background: linear-gradient(135deg, #E8C5B8, #F2DDD6); }
+  .g2 { background: linear-gradient(135deg, #F2DDD6, #FAF5EF); }
+  .g3 { background: linear-gradient(135deg, #C4747A, #E8C5B8); }
+  .g4 { background: linear-gradient(135deg, #FAF5EF, #E8C5B8); }
+  .g5 { background: linear-gradient(135deg, #E8C5B8, #C4747A); }
+
+  /* CONTACT */
+  .contact {
+    padding: 8rem 6rem;
+    background: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;
+    border-top: 1px solid rgba(196,116,122,0.15);
+  }
+  .contact-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    color: var(--mocha); margin-bottom: 1.5rem;
+  }
+  .contact-tagline em { color: var(--rose); font-style: italic; }
+  .contact-desc {
+    font-size: 0.85rem; font-weight: 300; line-height: 1.9;
+    color: #6B4444; margin-bottom: 3rem; letter-spacing: 0.02em;
+  }
+  .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; gap: 1.2rem; align-items: center; }
+  .contact-icon {
+    width: 44px; height: 44px; background: var(--light-pink);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1rem;
+  }
+  .contact-item-label {
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.2rem;
+  }
+  .contact-item-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--mocha);
+  }
+  .form-group { margin-bottom: 1.5rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 0.9rem 1rem;
+    border: 1px solid rgba(196,116,122,0.25);
+    background: white; font-family: 'Jost', sans-serif;
+    font-size: 0.85rem; color: var(--mocha);
+    outline: none; transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--rose);
+  }
+  .form-group textarea { height: 120px; resize: none; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .btn-submit {
+    width: 100%; padding: 1.1rem;
+    background: var(--deep); color: var(--cream);
+    border: none; font-family: 'Jost', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    cursor: none; transition: background 0.3s;
+  }
+  .btn-submit:hover { background: var(--rose); }
+
+  /* FOOTER */
+  footer {
+    background: var(--mocha); padding: 3rem 6rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-style: italic; color: var(--cream);
+  }
+  .footer-tagline {
+    font-size: 0.65rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    margin-top: 0.3rem;
+  }
+  .footer-social { display: flex; gap: 1.5rem; }
+  .social-link {
+    width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 0.75rem;
+    color: var(--blush); transition: all 0.3s;
+  }
+  .social-link:hover { border-color: var(--rose); color: var(--rose); }
+  .footer-copy {
+    font-size: 0.65rem; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { height: 50vw; }
+    .hero-text { padding: 3rem 2rem; }
+    .offerings { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 2rem; }
+    .section-label { writing-mode: initial; transform: none; }
+    .offerings-grid { grid-template-columns: repeat(2,1fr); }
+    .services { padding: 4rem 2rem; }
+    .services-grid { grid-template-columns: repeat(2,1fr); }
+    .why { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
+    .why-visual { height: 300px; }
+    .gallery { padding: 3rem 2rem; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-cell.tall { grid-row: auto; }
+    .contact { grid-template-columns: 1fr; padding: 4rem 2rem; gap: 3rem; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sweet Signature <span style="font-style:normal;font-size:0.9rem;color:var(--gold)">by Papsie</span></div>
+  <ul class="nav-links">
+    <li><a href="#offerings">Offerings</a></li>
+    <li><a href="#services">Occasions</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Order Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Artisan Bakery · Kericho</div>
+    <h1 class="hero-title">
+      Crafted with<br><em>Passion,</em><br>Baked with Love
+    </h1>
+    <p class="hero-subtitle">Fresh &amp; Delicious, Every Creation</p>
+    <div class="hero-location">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Based in Kericho, Kenya
+    </div>
+    <p class="hero-desc">Where every celebration deserves a centerpiece as beautiful as the moment itself. We craft bespoke baked creations for your most treasured occasions.</p>
+    <a href="#contact" class="btn-primary">Commission Your Cake</a>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-cake-display">🎂</div>
+    <div class="float-tag top-left">
+      <span>100%</span>
+      Handcrafted
+    </div>
+    <div class="float-tag bottom-right">
+      <span>Bespoke</span>
+      Designs
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Wedding Cakes</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Cupcakes</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Cake Pops</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Artisan Cookies</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Birthday Cakes</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Custom Orders</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Wedding Cakes</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Cupcakes</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Cake Pops</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Artisan Cookies</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Birthday Cakes</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Custom Orders</span>
+    <span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- OFFERINGS -->
+<section class="offerings" id="offerings">
+  <div style="display:flex;gap:2rem;align-items:flex-start;padding-top:0.5rem">
+    <div class="section-label">Our Craft</div>
+  </div>
+  <div class="offerings-content">
+    <h2 class="section-header reveal">The <em>Artistry</em><br>of Baking</h2>
+    <p class="offerings-intro reveal reveal-delay-1">Each creation is a unique work of edible art — made with premium ingredients, extraordinary attention to detail, and an unwavering commitment to flavour.</p>
+    <div class="offerings-grid">
+      <div class="offering-card reveal">
+        <div class="offering-icon">🎂</div>
+        <div class="offering-name">Cakes</div>
+        <div class="offering-sub">Signature &amp; Custom</div>
+      </div>
+      <div class="offering-card reveal reveal-delay-1">
+        <div class="offering-icon">🧁</div>
+        <div class="offering-name">Cupcakes</div>
+        <div class="offering-sub">Artisan Crafted</div>
+      </div>
+      <div class="offering-card reveal reveal-delay-2">
+        <div class="offering-icon">🍡</div>
+        <div class="offering-name">Cake Pops</div>
+        <div class="offering-sub">Bite-Sized Luxury</div>
+      </div>
+      <div class="offering-card reveal reveal-delay-3">
+        <div class="offering-icon">🍪</div>
+        <div class="offering-name">Cookies</div>
+        <div class="offering-sub">House Recipes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <span class="section-label" style="writing-mode:initial;transform:none;display:block;margin-bottom:1rem">We Celebrate With You</span>
+    <h2 class="section-header">Every <em>Occasion</em><br>Deserves Perfection</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-num">01</div>
+      <div class="service-name">Weddings</div>
+    </div>
+    <div class="service-item reveal reveal-delay-1">
+      <div class="service-num">02</div>
+      <div class="service-name">Birthdays</div>
+    </div>
+    <div class="service-item reveal reveal-delay-2">
+      <div class="service-num">03</div>
+      <div class="service-name">Baby Showers</div>
+    </div>
+    <div class="service-item reveal reveal-delay-3">
+      <div class="service-num">04</div>
+      <div class="service-name">Gender Reveals</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">05</div>
+      <div class="service-name">Graduations</div>
+    </div>
+    <div class="service-item reveal reveal-delay-1">
+      <div class="service-num">06</div>
+      <div class="service-name">Corporate</div>
+    </div>
+    <div class="service-item reveal reveal-delay-2">
+      <div class="service-num">07</div>
+      <div class="service-name">Anniversaries</div>
+    </div>
+    <div class="service-item reveal reveal-delay-3">
+      <div class="service-num">08</div>
+      <div class="service-name">All Occasions</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY / ABOUT -->
+<section class="why" id="about">
+  <div class="why-visual">
+    <div class="why-card main reveal">
+      <div class="why-card-label">Our Promise</div>
+      <div class="why-card-text">"Every slice tells a story of dedication, creativity, and love."</div>
+    </div>
+    <div class="why-card accent reveal reveal-delay-2">
+      <div class="why-card-label">Based in</div>
+      <div class="why-card-text">Kericho, Kenya<br>— Delivering Joy</div>
+    </div>
+  </div>
+  <div class="why-content">
+    <div class="section-label" style="writing-mode:initial;transform:none;margin-bottom:1rem">Why Choose Us</div>
+    <h2 class="section-header reveal">The Sweet<br><em>Signature</em> Difference</h2>
+    <p class="why-desc reveal reveal-delay-1">We believe every celebration deserves a centrepiece that is as beautiful as it is delicious. Our passion for baking drives us to source the finest ingredients and pour our hearts into every creation.</p>
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar-num">01</div>
+        <div>
+          <div class="pillar-title">Bespoke Creations</div>
+          <div class="pillar-text">Every order is tailored to your vision. We collaborate closely to bring your dream cake to life, down to the finest detail.</div>
+        </div>
+      </div>
+      <div class="pillar reveal reveal-delay-1">
+        <div class="pillar-num">02</div>
+        <div>
+          <div class="pillar-title">Premium Ingredients</div>
+          <div class="pillar-text">We use only the finest, freshest ingredients — because exceptional flavour is non-negotiable.</div>
+        </div>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <div class="pillar-num">03</div>
+        <div>
+          <div class="pillar-title">Crafted with Love</div>
+          <div class="pillar-text">Handmade with care, every creation carries the warmth and intention of a true artisan baker.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-header reveal">
+    <div>
+      <div class="section-label" style="writing-mode:initial;transform:none;margin-bottom:0.5rem">Portfolio</div>
+      <h2 class="section-header">Our <em>Creations</em></h2>
+    </div>
+    <a href="#contact" style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--rose);text-decoration:none;border-bottom:1px solid var(--rose);padding-bottom:0.3rem">Order Yours →</a>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-cell tall g1 reveal" data-label="Signature Cakes">🎂</div>
+    <div class="gallery-cell g2 reveal reveal-delay-1" data-label="Cupcakes">🧁</div>
+    <div class="gallery-cell g3 reveal reveal-delay-2" data-label="Cake Pops">🍡</div>
+    <div class="gallery-cell g4 reveal reveal-delay-1" data-label="Wedding Tiers">💍</div>
+    <div class="gallery-cell g5 reveal reveal-delay-3" data-label="Artisan Cookies">🍪</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-info reveal">
+    <div class="section-label" style="writing-mode:initial;transform:none;margin-bottom:1rem">Get In Touch</div>
+    <h2 class="contact-tagline">Let's Create Something <em>Unforgettable</em> Together</h2>
+    <p class="contact-desc">Ready to place your order or simply want to chat about your vision? We'd love to hear from you. Every great cake starts with a conversation.</p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Phone / WhatsApp</div>
+          <div class="contact-item-val">+254 796 727 795</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" style="font-size:0.9rem">TK</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">TikTok</div>
+          <div class="contact-item-val">@Sweetsignaturebyp</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon" style="font-size:0.9rem">IG</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Instagram</div>
+          <div class="contact-item-val">@Sweetsignature.bypapsie</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Location</div>
+          <div class="contact-item-val">Kericho, Kenya</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form reveal reveal-delay-2">
+    <div class="section-label" style="writing-mode:initial;transform:none;margin-bottom:1.5rem">Place Your Order</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+254 ...">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Occasion</label>
+      <select>
+        <option value="">Select an occasion</option>
+        <option>Wedding</option>
+        <option>Birthday</option>
+        <option>Baby Shower</option>
+        <option>Gender Reveal</option>
+        <option>Graduation</option>
+        <option>Corporate Event</option>
+        <option>Anniversary</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Event Date</label>
+        <input type="date">
+      </div>
+      <div class="form-group">
+        <label>Product</label>
+        <select>
+          <option value="">Select product</option>
+          <option>Cake</option>
+          <option>Cupcakes</option>
+          <option>Cake Pops</option>
+          <option>Cookies</option>
+          <option>Assorted</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Special Requests / Vision</label>
+      <textarea placeholder="Tell us about your dream creation — flavours, colours, themes, size..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="alert('Thank you! We will be in touch shortly. 🍰')">Send Your Order Request</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Sweet Signature by Papsie</div>
+    <div class="footer-tagline">Fresh & Delicious · Baked with Love</div>
+  </div>
+  <div class="footer-social">
+    <a href="#" class="social-link" title="TikTok">TK</a>
+    <a href="#" class="social-link" title="Instagram">IG</a>
+    <a href="https://wa.me/254796727795" class="social-link" title="WhatsApp">WA</a>
+  </div>
+  <div class="footer-copy">© 2026 Sweet Signature by Papsie</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 60);
+  });
+  document.querySelectorAll('a,button,.offering-card,.service-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px'; cursor.style.height = '20px';
+      ring.style.width = '55px'; ring.style.height = '55px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '10px'; cursor.style.height = '10px';
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
