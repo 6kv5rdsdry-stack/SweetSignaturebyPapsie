@@ -590,14 +590,7 @@
 
   <div class="hero-visual">
     <div class="hero-cake-display">
-      <!-- ============================================================
-           HERO IMAGE
-           Replace the src below with your own image path or URL.
-           Recommended: a beautiful portrait/square photo of your
-           best cake, around 900×1100px.
-           Example: src="images/hero-cake.jpg"
-           ============================================================ -->
-      <!-- <img class="chocolate.jpeg" src="chocolate.jpeg" alt="Sweet Signature hero cake"> -->
+      <img class="img-hero" src="chocolate.jpeg" alt="Sweet Signature hero cake">
       🎂
     </div>
     <div class="float-tag top-left">
@@ -651,29 +644,25 @@
     <p class="offerings-intro reveal reveal-delay-1">Each creation is a unique work of edible art — made with premium ingredients, extraordinary attention to detail, and an unwavering commitment to flavour.</p>
     <div class="offerings-grid">
       <div class="offering-card reveal">
-        <!-- OFFERING IMAGE 1 — Cakes (recommended: 400×300px square photo of a cake) -->
-        <!-- <img class="flower.jpeg" src="flower.jpeg" alt="Cakes"> -->
+        <img class="img-offering" src="flower.jpeg" alt="Cakes">
         <div class="offering-icon">🎂</div>
         <div class="offering-name">Cakes</div>
         <div class="offering-sub">Signature &amp; Custom</div>
       </div>
       <div class="offering-card reveal reveal-delay-1">
-        <!-- OFFERING IMAGE 2 — Cupcakes (recommended: 400×300px) -->
-        <!-- <img class="cupcake.jpeg" src="cupcake.jpeg" alt="Cupcakes"> -->
+        <img class="img-offering" src="cupcake.jpeg" alt="Cupcakes">
         <div class="offering-icon">🧁</div>
         <div class="offering-name">Cupcakes</div>
         <div class="offering-sub">Artisan Crafted</div>
       </div>
       <div class="offering-card reveal reveal-delay-2">
-        <!-- OFFERING IMAGE 3 — Cake Pops (recommended: 400×300px) -->
-        <!-- <img class="cakepop.jpeg" src="cakepop.jpeg" alt="Cake Pops"> -->
+        <img class="img-offering" src="cakepop.jpeg" alt="Cake Pops">
         <div class="offering-icon">🍡</div>
         <div class="offering-name">Cake Pops</div>
         <div class="offering-sub">Bite-Sized Luxury</div>
       </div>
       <div class="offering-card reveal reveal-delay-3">
-        <!-- OFFERING IMAGE 4 — Cookies (recommended: 400×300px) -->
-        <!-- <img class="cookie.jpeg" src="cookie.jpeg" alt="Cookies"> -->
+        <img class="img-offering" src="cookie.jpeg" alt="Cookies">
         <div class="offering-icon">🍪</div>
         <div class="offering-name">Cookies</div>
         <div class="offering-sub">House Recipes</div>
@@ -728,14 +717,7 @@
 <section class="why" id="about">
   <div class="why-visual">
     <div class="why-card main reveal">
-      <!-- WHY / ABOUT IMAGE
-           Replace src with a photo of you baking, your kitchen, or a
-           beautiful finished creation. Recommended: 600×400px landscape.
-           When uncommented, the quote text is hidden and the card
-           becomes a full photo frame.
-           Example: src="images/about-photo.jpg"
-      -->
-      <!-- <img class="flower.jpeg" src="flower.jpeg" alt="About Sweet Signature"> -->
+      <img class="img-why" src="flower.jpeg" alt="About Sweet Signature">
       <div class="why-card-label">Our Promise</div>
       <div class="why-card-text">"Every slice tells a story of dedication, creativity, and love."</div>
     </div>
@@ -785,28 +767,23 @@
   </div>
   <div class="gallery-grid">
     <div class="gallery-cell tall g1 reveal" data-label="Signature Cakes">
-      <!-- GALLERY IMAGE 1 — tall feature cell (recommended: 600×900px portrait)
-           <img class="genderboy.jpeg" src="genderboy.jpeg" alt="Signature Cakes"> -->
+      <img class="img-gallery" src="genderboy.jpeg" alt="Signature Cakes">
       🎂
     </div>
     <div class="gallery-cell g2 reveal reveal-delay-1" data-label="Cupcakes">
-      <!-- GALLERY IMAGE 2 (recommended: 500×400px)
-           <img class="butterfly.jpeg" src="butterfly.jpeg" alt="Cupcakes"> -->
+      <img class="img-gallery" src="butterfly.jpeg" alt="Cupcakes">
       🧁
     </div>
     <div class="gallery-cell g3 reveal reveal-delay-2" data-label="Cake Pops">
-      <!-- GALLERY IMAGE 3 (recommended: 500×400px)
-           <img class="pink.jpeg" src="pink.jpeg" alt="Cake Pops"> -->
+      <img class="img-gallery" src="pink.jpeg" alt="Cake Pops">
       🍡
     </div>
     <div class="gallery-cell g4 reveal reveal-delay-1" data-label="Wedding Tiers">
-      <!-- GALLERY IMAGE 4 (recommended: 500×400px)
-           <img class="anniversary.jpeg src="anniversary.jpeg" alt="Wedding Tiers"> -->
+      <img class="img-gallery" src="anniversary.jpeg" alt="Wedding Tiers">
       💍
     </div>
     <div class="gallery-cell g5 reveal reveal-delay-3" data-label="Artisan Cookies">
-      <!-- GALLERY IMAGE 5 (recommended: 500×400px)
-           <img class="birthday.jpeg" src="birthday.jpeg" alt="Artisan Cookies"> -->
+      <img class="img-gallery" src="birthday.jpeg" alt="Artisan Cookies">
       🍪
     </div>
   </div>
@@ -889,7 +866,7 @@
           <option>Cupcakes</option>
           <option>Cake Pops</option>
           <option>Cookies</option>
-          <option>Gender Reveal</option>
+          <option>Assorted</option>
         </select>
       </div>
     </div>
@@ -944,7 +921,5 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
-</body>
-</html>
 </body>
 </html>
